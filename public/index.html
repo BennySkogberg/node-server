@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Server</title>
+</head>
+
+<body>
+  <h1>Server</h1>
+  <div id="issues">
+    <p>Listing Issues</p>
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io();
+    socket.on('issue', function (data) {
+      // console.log(data)
+      for (let i = 0; i < data.issue.length; i++) {
+        var p = document.createElement('p')
+        var text = document.createTextNode(JSON.stringify(data.issue[i].title))
+        var div = document.getElementById('issues')
+        p.appendChild(text)
+        div.appendChild(p)
+      }
+    })
+  </script>
+</body>
+
+</html>
